@@ -1,0 +1,29 @@
+@use './reset';
+@use './variables';
+
+body {
+  background-color: #0c0c0c;
+  font-size: 14px;
+  line-height: 1.6;
+  font-family: "Montserrat", sans-serif;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+   -webkit-tap-highlight-color: #FFF498;
+}
+
+::selection {
+  background: #FFF498;
+}
+
+::-moz-selection {
+  background: #FFF498;
+}
+
+img::selection {
+  background: transparent;
+}
+
+img::-moz-selection {
+  background: transparent;
+}

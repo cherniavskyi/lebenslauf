@@ -1,0 +1,43 @@
+.mainContent {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 60px 0 0;
+  list-style: none;
+  box-sizing: border-box;
+
+   @media (min-width: 1096px) {
+    padding-top: 0;
+  }
+}
+
+.section {
+  position: absolute;
+  width: 100%;
+  height: calc(100% - 80px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .4s ease-in-out, visibility 0s .4s;
+
+  @media (min-width: 1096px) {
+    height: 100%;
+  }
+
+  &.isActive {
+    opacity: 1;
+    visibility: visible;
+    z-index: 1;
+    transition: opacity .4s ease-in-out .4s;
+  }
+
+  &__next {
+    transform: translateY(-45px);
+    transition: transform .4s ease-in-out;
+  }
+
+  &__prev {
+    transform: translateY(45px);
+    transition: transform .4s ease-in-out;
+  }
+}
