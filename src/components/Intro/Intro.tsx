@@ -1,3 +1,4 @@
+import hero from '../../assets/img/introduction-visual.png'; 
 import styles from './intro.module.scss';
 
 type Props = {
@@ -18,7 +19,7 @@ const Intro = ({ setActiveSection }: Props) => {
           </svg>
           <span className={styles.btn_background}></span>
         </button>
-        <img src="src/assets/img/introduction-visual.png" alt="Photo" />
+        <img src={hero} alt="Photo" />
       </div>
       <div className={styles.intro__options}>
         <a>

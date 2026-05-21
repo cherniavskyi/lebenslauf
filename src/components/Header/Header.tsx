@@ -1,3 +1,4 @@
+import logo from '../../assets/img/logo.png'; 
 import styles from './header.module.scss';
 
 type Props = {
@@ -9,7 +10,7 @@ const Header = ({ setIsMenuOpen, setActiveSection }: Props) => {
   return (
     <header className={styles.header}>
       <a className={styles.header__logo} onClick={() => setActiveSection(0)}>
-        <img src="src/assets/img/logo.png" alt="Global" />
+        <img src={logo} alt="logo" />
       </a>
       <button className={`${styles.header__button} ${styles.contact_button}`} onClick={() => setActiveSection(4)}>Kontakt</button>
       <div
