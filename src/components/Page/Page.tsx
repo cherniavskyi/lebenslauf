@@ -28,38 +28,97 @@ const Page = () => {
   const canScroll = useRef(true);
 
   useEffect(() => {
+    let touchStartY = 0;
+    let touchEndY = 0;
+
     const handleWheel = (e: WheelEvent) => {
       if (Math.abs(e.deltaY) < 50) return;
 
       if (!canScroll.current) return;
 
+      triggerScroll();
+
+      if (e.deltaY > 0) {
+        nextSection();
+      } else {
+        prevSection();
+      }
+    };
+
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartY = e.touches[0].clientY;
+    };
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      touchEndY = e.changedTouches[0].clientY;
+
+      const delta = touchStartY - touchEndY;
+      
+      if (Math.abs(delta) < 50) return;
+
+      if (!canScroll.current) return;
+
+      triggerScroll();
+
+      if (delta > 0) {
+        nextSection();
+      } else {
+        prevSection();
+      }
+    };
+
+    const triggerScroll = () => {
       canScroll.current = false;
 
       setTimeout(() => {
         canScroll.current = true;
       }, 800);
+    };
 
-      if (e.deltaY > 0) {
-        setActiveSection((prev) =>
-          prev === sections.length - 1
-            ? 0
-            : prev + 1
-        );
-      } else {
-        setActiveSection((prev) =>
-          prev === 0
-            ? sections.length - 1
-            : prev - 1
-        );
-      }
+    const nextSection = () => {
+      setActiveSection((prev) =>
+        prev === sections.length - 1
+          ? 0
+          : prev + 1
+      );
+    };
+
+    const prevSection = () => {
+      setActiveSection((prev) =>
+        prev === 0
+          ? sections.length - 1
+          : prev - 1
+      );
     };
 
     window.addEventListener('wheel', handleWheel);
 
+    window.addEventListener(
+      'touchstart',
+      handleTouchStart,
+      { passive: true }
+    );
+
+    window.addEventListener(
+      'touchend',
+      handleTouchEnd,
+      { passive: true }
+    );
+
     return () => {
       window.removeEventListener('wheel', handleWheel);
+
+      window.removeEventListener(
+        'touchstart',
+        handleTouchStart
+      );
+
+      window.removeEventListener(
+        'touchend',
+        handleTouchEnd
+      );
     };
-  }, []);  
+  }, []);
 
   return (
     <div className={classNames(
